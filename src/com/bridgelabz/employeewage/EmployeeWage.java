@@ -12,6 +12,11 @@ public class EmployeeWage {
 		System.out.println("Welcome to Employee Wage Computation Program");
 
 		Random random = new Random(); // random object
+		// input
+		int wagePerHour = 20;
+		int fullDayHours = 8;
+		int salary = 0;
+
 		/*
 		 * will give 0 or 1 random number
 		 */
@@ -20,10 +25,12 @@ public class EmployeeWage {
 		/*
 		 * condition for present or absent
 		 */
-		if (randomNum == 1)
+		if (randomNum == 1) {
 			System.out.println("Employee  is Present");
-		else
+			salary = wagePerHour * fullDayHours;
+		} else
 			System.out.println("Employee  is Absent");
+		System.out.println("salary is: " + salary);
 
 	}
 
