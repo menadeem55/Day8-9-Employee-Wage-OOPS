@@ -5,7 +5,7 @@ import java.util.Random;
 public class EmployeeWage {
 
 	/*
-	 * check Employee is present or Absent using random
+	 * solving using switch case
 	 */
 	public static void main(String[] args) {
 
@@ -19,23 +19,33 @@ public class EmployeeWage {
 		int salary = 0;
 
 		/*
-		 * will give 0 or 1 random number
+		 * will give 0,1,2 random number
 		 */
-		int randomNum = random.nextInt(2);
+		int randomNum = random.nextInt(3);
 
 		/*
-		 * condition for present or absent
+		 * By using Switch case statement Calculate and getting this salary Getting this
+		 * salary employee Present and Absent and print salary
 		 */
-		if (randomNum == 1) {
-			System.out.println("Employee  is Present");
+		switch (randomNum) {
+
+		case 0:
+			System.out.println("Employee is Absent");
+			System.out.println("Monthly Salary will be: ");
+			break;
+		case 1:
+			System.out.println("Employee is Present");
+			System.out.println("Monthly salary for Full Day: ");
 			salary = wagePerHour * fullDayHours;
-			System.out.println("Monthly salary for Full Day is: " + salary);
-		} else if (randomNum == 2) {
-			salary = halfDayHours * wagePerHour;
-			System.out.println("Monthly salary for Half Day is: " + salary);
-		} else
-			System.out.println("Employee  is Absent");
-		System.out.println("salary is: " + salary);
+			break;
+		case 2:
+			System.out.println("Employee is Present");
+			System.out.println("Monthly Salary for Half Day: ");
+			salary = wagePerHour * halfDayHours;
+			break;
+
+		}
+		System.out.println(+salary);
 
 	}
 
