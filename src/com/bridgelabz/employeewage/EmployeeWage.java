@@ -5,26 +5,26 @@ import java.util.Random;
 public class EmployeeWage {
 
 	/*
-	 * Calculate Wages till a condition of total working hours or days is reached
+	 * Refactor the Code to write a Class Method to Compute Employee Wage
 	 */
-	public static void main(String[] args) {
 
+	public static int wagePerHour = 20;
+	public static int fullDayHours = 8;
+	public static int halfDayHours = 4;
+	public static int salary = 0;
+	public static int monthlysalary = 0;
+	public static int workingDaysPerMonth = 20;
+	public static int days = 0;
+	public static int monthlyHours = 0;
+
+	public static int EmpWage() {
 		System.out.println("Welcome to Employee Wage Computation Program");
-
-		Random random = new Random(); // random object
-		// input
-		int wagePerHour = 20;
-		int fullDayHours = 8;
-		int halfDayHours = 4;
-		int salary = 0;
-		int monthlysalary = 0;
-		int days = 0;
-		int monthlyHours = 0;
+		Random random = new Random(); // create object
 
 		/*
 		 * for a month assuming 100 hours and 20day will give 0,1,2 random number
 		 */
-		while (days != 20 && monthlyHours != 100) {
+		while (days != 20 && monthlyHours != 100) { // condition till working hours reaches for month
 			days++;
 			int randomNum = random.nextInt(3);
 
@@ -35,18 +35,14 @@ public class EmployeeWage {
 
 			case 0:
 				// System.out.println("Employee is Absent");
-				// System.out.println("Monthly Salary will be: ");
 				break;
 			case 1:
-				// System.out.println("Employee is Present for Full Day");
 				System.out.println("Monthly salary for Full Day: ");
 				salary = wagePerHour * fullDayHours;
 				break;
 			case 2:
-				// System.out.println("Employee is Present for Half Day");
 				System.out.println("Monthly Salary for Half Day: ");
 				salary = wagePerHour * halfDayHours;
-				break;
 
 			}
 			monthlysalary = monthlysalary + salary;
@@ -54,7 +50,12 @@ public class EmployeeWage {
 
 		}
 		System.out.println("Monthly Salary: " + monthlysalary); // Print the total of monthly salary
+		return monthlysalary;
 
+	}
+
+	public static void main(String[] args) {
+		EmpWage();
 	}
 
 }
