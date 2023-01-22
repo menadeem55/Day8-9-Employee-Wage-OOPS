@@ -1,18 +1,14 @@
 package com.bridgelabz.employeewage;
 
+import java.util.LinkedList;
+
 public class EmployeeWage implements IComputeEmpWage {
-	
-	//Ability to manage Employee Wage of multiple companies
-
-
 	public static final int IS_FULL_TIME = 1;
 	public static final int IS_PART_TIME = 2;
+	private LinkedList<CompanyWage> companyWageList;
 
-	private int numberOfCompanies = 0;
-	private CompanyWage[] companyWageArray;
-
-	 public EmployeeWage() {
-		companyWageArray = new CompanyWage[5];
+	public EmployeeWage() {
+		companyWageList = new LinkedList<>();
 	}
 
 	public static void main(String args[]) {
@@ -25,15 +21,15 @@ public class EmployeeWage implements IComputeEmpWage {
 	}
 
 	public void addCompany(String companyName, int empRatePerHour, int numOfWorkingDays, int maxHoursInMonth) {
-		companyWageArray[numberOfCompanies] = new CompanyWage(companyName, empRatePerHour, numOfWorkingDays,
-				maxHoursInMonth);
-		numberOfCompanies++;
+		CompanyWage companyWage = new CompanyWage(companyName, empRatePerHour, numOfWorkingDays, maxHoursInMonth);
+		companyWageList.add(companyWage);
 	}
 
 	public void computeEmpWage() {
-		for (int i = 0; i < numberOfCompanies; i++) {
-			companyWageArray[i].setTotalEmpWage(this.computeEmpWage(companyWageArray[i]));
-			System.out.println(companyWageArray[i]);
+		for (int i = 0; i < companyWageList.size(); i++) {
+			CompanyWage companyWage = companyWageList.get(i);
+			companyWage.setTotalEmpWage(this.computeEmpWage(companyWage));
+			System.out.println(companyWage);
 		}
 	}
 
