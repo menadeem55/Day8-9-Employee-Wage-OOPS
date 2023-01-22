@@ -1,84 +1,75 @@
 package com.bridgelabz.employeewage;
 
-import java.util.Random;
-
 public class EmployeeWage {
 
 	/*
 	 * compute Employee Wage for multiple companies
 	 */
 
-	public static int fullDayHours = 8;
-	public static int halfDayHours = 4;
+	public static final int IS_FULL_TIME = 1;
+	public static final int IS_PART_TIME = 2;
 
 	private final String companyName;
-	private final int WagePerHour;
-	private final int workingHours;
-	private final int workingDays;
+	private final int empRatePerHour;
+	private final int numOfWorkingDays;
+	private final int maxHoursInMonth;
+	private int totalEmpWage;
 
-	static Random random = new Random(); // create an object
-
-	public EmployeeWage(String companyName, int wagePerHour, int workingHours, int workingDays) {
+	public EmployeeWage(String companyName, int empRatePerHour, int numOfWorkingDays, int maxHoursInMonth) {
 		this.companyName = companyName;
-		this.WagePerHour = wagePerHour;
-		this.workingDays = workingDays;
-		this.workingHours = workingHours;
-
+		this.empRatePerHour = empRatePerHour;
+		this.numOfWorkingDays = numOfWorkingDays;
+		this.maxHoursInMonth = maxHoursInMonth;
 	}
 
-	public int calculateWage() {
-		int salary = 0;
-		int totalSalary = 0;
-		int totalWorkingHours = 0;
-		int days = 0;
+	public static void main(String args[]) {
+		EmployeeWage TCS = new EmployeeWage("TCS", 50, 15, 200);
+		EmployeeWage Honda = new EmployeeWage("Honda", 80, 20, 120);
+		EmployeeWage Bajaj = new EmployeeWage("Bajaj", 90, 18, 220);
 
-		while (totalWorkingHours <= workingHours && days <= workingDays) {
-			days++;
-			int empCheck = random.nextInt(3); // give 0,1,2 numbers
+		TCS.computeEmpWage();
+		System.out.println(TCS);
+		Honda.computeEmpWage();
+		System.out.println(Honda);
+		Bajaj.computeEmpWage();
+		System.out.println(Bajaj);
+	}
 
-			/*
-			 * By using switch case for empCheck Calculating of salary and total working
-			 * hours
-			 */
+	public void computeEmpWage() {
+		int empHrs = 0;
+		int empWage = 0;
+		int totalWorkingDays = 0;
+		int totalEmpHrs = 0;
+
+		for (totalWorkingDays = 1; totalEmpHrs <= maxHoursInMonth
+				&& totalWorkingDays < numOfWorkingDays; totalWorkingDays++) {
+			int empCheck = (int) Math.floor(Math.random() * 10) % 3;
+
 			switch (empCheck) {
-			case 1:
-
-				System.out.println("Present Fullday.");
-				salary = WagePerHour * fullDayHours;
-				totalWorkingHours = totalWorkingHours + fullDayHours;
+			case IS_FULL_TIME:
+				empHrs = 8;
+				System.out.println("Employee is present Full time.");
 				break;
-			case 2:
 
-				System.out.println("Present HalfDay.");
-				salary = WagePerHour * halfDayHours;
-				totalWorkingHours = totalWorkingHours + halfDayHours;
+			case IS_PART_TIME:
+				empHrs = 4;
+				System.out.println("Employee is present Part time.");
 				break;
+
 			default:
-				System.out.println("Employee Absent"); // printed
+				empHrs = 0;
+				System.out.println("Employee is absent.");
 			}
-			/*
-			 * if we have to print days show the working hours and to getting of salary
-			 */
-			System.out.print("Day: " + days + empCheck + " ");
-			System.out.print("Working Hours: " + totalWorkingHours + " ");
-			System.out.print("Salary is: " + salary + " ");
-			totalSalary = totalSalary + salary;
+			empWage = empHrs * empRatePerHour;
+			totalEmpHrs += empHrs;
+			System.out.println("Day " + totalWorkingDays + " Employee hours : " + empHrs + " Wage $" + empWage);
 		}
-		return totalWorkingHours * WagePerHour;
-
+		totalEmpWage = totalEmpHrs * empRatePerHour;
+		System.out.println();
 	}
 
-	// main method
-	public static void main(String[] args) {
-		/*
-		 * it create employeeWage object and add to company names print the total
-		 * employee wage company
-		 */
-		EmployeeWage TCS = new EmployeeWage("TCS", 23, 90, 21);
-		EmployeeWage Honda = new EmployeeWage("Honda", 24, 109, 22);
-
-		System.out.println("Total employee's wage of Company: " + TCS.companyName + ": " + TCS.calculateWage());
-		System.out.println("Total employee's wage of Company: " + Honda.companyName + ": " + Honda.calculateWage());
-
+	@Override
+	public String toString() {
+		return " " + companyName + " company Employee Monthly Wage : $" + totalEmpWage + "\n";
 	}
 }
